@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyPOS - نظامك المتكامل لإدارة المبيعات والمخزون</title>
+    <meta name="description"
+        content="MyPOS هو نظام متكامل لإدارة نقاط البيع، صمم ليوفر للتجار تجربة مستخدم سلسة، إدارة دقيقة للمخزون، وتتبعاً احترافياً للمبيعات والديون.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Outfit:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --bg: #0f172a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.15), transparent),
+                radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.1), transparent);
+            position: relative;
+        }
+
+        nav {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            padding: 30px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo i {
+            color: var(--primary);
+            font-size: 32px;
+        }
+
+        .hero-content h1 {
+            font-size: 64px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .card i {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        /* Screenshots Section */
+        .screenshots {
+            padding: 100px 0;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .screenshot-item {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            transition: transform 0.5s ease;
+        }
+
+        .screenshot-item:hover {
+            transform: scale(1.02);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            display: block;
+        }
+
+        .screenshot-label {
+            background: #1e293b;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        /* Download Section */
+        .download {
+            padding: 120px 0;
+            text-align: center;
+        }
+
+        .download-box {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 80px 40px;
+            border-radius: 40px;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-box h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .download-btn {
+            background: #fff;
+            color: var(--bg);
+            padding: 15px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-align: right;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .download-btn i {
+            font-size: 32px;
+        }
+
+        .download-btn .btn-text span {
+            display: block;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .download-btn .btn-text strong {
+            display: block;
+            font-size: 18px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .social-links a {
+            color: var(--text-muted);
+            font-size: 24px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 42px;
+            }
+
+            .hero-content p {
+                font-size: 18px;
+            }
+
+            .section-header h2 {
+                font-size: 32px;
+            }
+
+            .screenshot-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .download-box h2 {
+                font-size: 32px;
+            }
+        }
+
+        /* Animations */
+        [data-aos] {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        [data-aos].aos-animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container" style="height: 100%;">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-cash-register"></i>
+                    MyPOS
+                </div>
+                <div class="links">
+                    <a href="#features" class="btn-text"
+                        style="color: #fff; text-decoration: none; margin-left: 20px;">المميزات</a>
+                    <a href="#screenshots" class="btn-text"
+                        style="color: #fff; text-decoration: none; margin-left: 20px;">الصور</a>
+                    <a href="#download" class="btn btn-primary" style="padding: 10px 25px; font-size: 14px;">تحميل
+                        الآن</a>
+                </div>
+            </nav>
+
+            <div class="hero-content">
+                <h1 data-aos>المستقبل لإدارة تجارتك بين يديك</h1>
+                <p data-aos>نظام MyPOS الجزائري الأول المصمم خصيصاً لتجار التجزئة. إدارة مبيعات، مخزون، ديون، وتنبيهات
+                    صلاحية في تطبيق واحد سهل وسريع.</p>
+                <div class="cta-buttons" data-aos>
+                    <a href="#download" class="btn btn-primary">
+                        <i class="fab fa-android"></i>
+                        ابدأ الآن مجاناً
+                    </a>
+                    <a href="#features" class="btn btn-secondary">اكتشف المزيد</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="features" class="features container">
+        <div class="section-header" data-aos>
+            <h2>لماذا يختار التجار MyPOS؟</h2>
+            <p>نحن نوفر لك الأدوات التي تحتاجها للنمو والتركيز على ما يهم حقاً.</p>
+        </div>
+        <div class="grid">
+            <div class="card" data-aos>
+                <i class="fas fa-boxes-stacked"></i>
+                <h3>إدارة المخزون</h3>
+                <p>تتبع دقيق لمنتجاتك، تنبيهات عند اقتراب نفاذ الكمية، وإحصائيات لحظية.</p>
+            </div>
+            <div class="card" data-aos>
+                <i class="fas fa-file-invoice-dollar"></i>
+                <h3>المبيعات والفواتير</h3>
+                <p>إنجاز عمليات البيع بلمح البصر، طباعة فواتير احترافية، وتتبع الأرباح اليومية.</p>
+            </div>
+            <div class="card" data-aos>
+                <i class="fas fa-user-clock"></i>
+                <h3>إدارة الديون</h3>
+                <p>نظام متكامل لتتبع ديون العملاء، المدفوعات الجزئية، ودفتر ديون رقمي منظم.</p>
+            </div>
+            <div class="card" data-aos>
+                <i class="fas fa-calendar-times"></i>
+                <h3>تنبيهات الصلاحية</h3>
+                <p>حماية تجارتك من الخسائر من خلال تنبيهات ذكية للمنتجات التي شارفت صلاحيتها على الانتهاء.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="screenshots" class="screenshots">
+        <div class="container">
+            <div class="section-header" data-aos>
+                <h2>واجهة مستخدم عصرية وسهلة</h2>
+                <p>تصميم مريح للعين يدعم الوضع الليلي والنهاري لضمان أفضل تجربة عمل.</p>
+            </div>
+            <div class="screenshot-grid">
+                <div class="screenshot-item" data-aos>
+                    <img src="images/Screenshot from 2026-02-28 14-31-37.png" alt="Dashboard Screen">
+                    <div class="screenshot-label">لوحة التحكم الرئيسية</div>
+                </div>
+                <div class="screenshot-item" data-aos>
+                    <img src="images/Screenshot from 2026-02-28 14-30-04.png" alt="POS Screen">
+                    <div class="screenshot-label">واجهة البيع السريع</div>
+                </div>
+                <div class="screenshot-item" data-aos>
+                    <img src="images/Screenshot from 2026-02-28 14-28-15.png" alt="Stats Screen">
+                    <div class="screenshot-label">التقارير والإحصائيات</div>
+                </div>
+                <div class="screenshot-item" data-aos>
+                    <img src="images/Screenshot from 2026-02-28 14-30-45.png" alt="Products Screen">
+                    <div class="screenshot-label">إدارة المنتجات</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="download container">
+        <div class="download-box" data-aos>
+            <h2>جاهز لرفع مستوى تجارتك؟</h2>
+            <p>انضم إلى مئات التجار الذين يثقون في MyPOS لإدارة أعمالهم اليوم.</p>
+            <div class="download-buttons">
+                <a href="#" class="download-btn">
+                    <i class="fab fa-android" style="color: #3DDC84;"></i>
+                    <div class="btn-text">
+                        <span>قريباً على</span>
+                        <strong>Google Play</strong>
+                    </div>
+                </a>
+                <a href="#" class="download-btn">
+                    <i class="fas fa-download" style="color: var(--primary);"></i>
+                    <div class="btn-text">
+                        <span>تحميل مباشر</span>
+                        <strong>نسخة APK</strong>
+                    </div>
+                </a>
+                <a href="#" class="download-btn">
+                    <i class="fab fa-windows" style="color: #0078D6;"></i>
+                    <div class="btn-text">
+                        <span>متاح الآن لـ</span>
+                        <strong>Windows</strong>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="container">
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p>© 2026 MyPOS. صنع بكل ❤️ لدعم التجار الجزائريين.</p>
+        <p style="margin-top: 10px; font-size: 14px;">تطوير: حمد عبد المؤمن</p>
+    </footer>
+
+    <script>
+        // Simple AOS (Animate on Scroll) implementation
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('aos-animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('[data-aos]').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
